@@ -5,6 +5,7 @@
 // Click any text, type, and press Save. Saving rewrites the words in index.html and keeps
 // the previous version as index.backup.html. Only this computer can reach this server, and
 // none of the editor is part of the published page. Needs Node 18 or newer, no packages.
+import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
 import { readFile, writeFile, copyFile, stat } from 'node:fs/promises';
 import { dirname, extname, join, normalize, sep } from 'node:path';
@@ -29,6 +30,16 @@ function applyEdits(html, edits) {
     html = html.replace(re, (_, open, close) => open + esc(tidy(value)) + close);
   }
   return { html, missing };
+}
+
+/** Marks styles.css and main.js with a version, so browsers never mix an old file with a new page. */
+async function stamp(html) {
+  for (const file of ['styles.css', 'main.js']) {
+    const text = (await readFile(join(ROOT, file), 'utf8')).replace(/\r\n/g, '\n');
+    const v = createHash('sha256').update(text).digest('hex').slice(0, 10);
+    html = html.replace(new RegExp(`"${file.replace('.', '\\.')}(\\?v=[0-9a-f]+)?"`), `"${file}?v=${v}"`);
+  }
+  return html;
 }
 
 const EDITOR = `
@@ -125,7 +136,7 @@ createServer(async (req, res) => {
       const { html, missing } = applyEdits(await readFile(PAGE, 'utf8'), edits);
       if (missing.length) return json(res, 400, { error: 'Not found on the page: ' + missing.join(', ') });
       await copyFile(PAGE, join(ROOT, 'index.backup.html'));
-      await writeFile(PAGE, html);
+      await writeFile(PAGE, await stamp(html));
       return json(res, 200, { saved: Object.keys(edits).length });
     }
     if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, 'text/plain', 'Not allowed');
