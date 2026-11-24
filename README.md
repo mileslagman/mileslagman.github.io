@@ -1,1 +1,1 @@
-# mileslagman.github.io
+mileslagman.com
