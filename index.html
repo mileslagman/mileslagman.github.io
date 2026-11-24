@@ -11,7 +11,7 @@
   <meta property="og:title" content="Miles Lagman, software engineer">
   <meta property="og:description" content="Software engineer graduating from Auburn University in May 2027. I build web apps and test how software breaks.">
   <meta property="og:url" content="https://mileslagman.com/">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231f4fb8'/%3E%3Cpath d='M6 25V7h5l5 9 5-9h5v18h-5V15l-5 8.500-5-8.500v10z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b3f63'/%3E%3Cpath d='M6 25V7h5l5 9 5-9h5v18h-5V15l-5 8.500-5-8.500v10z' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&amp;display=swap">
@@ -34,64 +34,98 @@
   </header>
 
   <main id="projects">
-    <section class="band festflow" id="festflow" aria-labelledby="festflow-h">
-      <div class="wrap festflow-grid">
+    <section class="band data" id="database" aria-labelledby="database-h">
+      <div class="wrap split">
         <div class="copy">
-          <h2 id="festflow-h">FestFlow plans a whole festival trip</h2>
-          <p>Pick a festival and it adds up the real cost: ticket, flight or drive, where you’ll stay, getting around, and food. It covers 18 festivals, splits shared costs across the group, and works out who pays whom back.</p>
-          <p>The server has no dependencies beyond Node. It keeps the API key off the browser and caches each price search for six hours, because the free plan allows only 250 a month. With no key, the app uses its own estimates.</p>
-          <p class="built">JavaScript, Node, SerpApi, OpenStreetMap</p>
-          <a class="button" href="https://github.com/mileslagman/festflow">Read the FestFlow code</a>
+          <h2 id="database-h">A database that checks who’s asking</h2>
+          <p>This is the database for a food delivery platform: 21 tables, held together with key and CHECK constraints. Customers, restaurant owners and admins each get two views, and every view asks one helper who is logged in. A suspended account sees nothing at all.</p>
+          <p>What a role doesn’t need, its view leaves out. The kitchen gets a first name and an initial, never an address. The customer learns a driver’s first name and vehicle, never a license plate.</p>
+          <p>Nine triggers guard the changes. Orders only move forward, reviews need a delivered order, and only an admin can change a commission rate, which is always logged.</p>
+          <p class="built">Course project in SQL and SQLite</p>
         </div>
-        <img class="shot" src="assets/festflow-dashboard.webp" width="1920" height="1290" alt="FestFlow dashboard with a countdown to the next festival, planned spend, budget left, and cost breakdowns for two trips.">
+        <div class="order">
+          <fieldset class="roles">
+            <legend>Who’s logged in?</legend>
+            <label><input type="radio" name="role" value="customer" checked><span>Customer</span></label>
+            <label><input type="radio" name="role" value="owner"><span>Restaurant owner</span></label>
+            <label><input type="radio" name="role" value="admin"><span>Admin</span></label>
+          </fieldset>
+          <p class="query"><code>SELECT * FROM <span id="view">v_customer_order_history</span></code></p>
+          <dl id="order" aria-live="polite"></dl>
+          <p class="note">One order with made-up data. Each role shows a selection of what its view returns.</p>
+        </div>
       </div>
     </section>
 
-    <section class="band slikube" id="slikube" aria-labelledby="slikube-h">
+    <section class="band food8" id="food8" aria-labelledby="food8-h">
       <div class="wrap">
-        <h2 id="slikube-h">This file crashes a Kubernetes security scanner</h2>
-        <pre class="exhibit"><code>&amp;a [*a]</code></pre>
+        <h2 id="food8-h">Food8 gets restaurants filming</h2>
+        <figure class="dots">
+          <svg viewBox="0 0 800 400" role="img" aria-label="A field of 1,000 dots with 19 highlighted">
+            <defs>
+              <pattern id="dot" width="16" height="20" patternUnits="userSpaceOnUse"><circle cx="8" cy="10" r="3.5" fill="#e58a7c"/></pattern>
+            </defs>
+            <rect width="800" height="400" fill="url(#dot)"/>
+            <path d="M8 390h288.1" stroke="#fff" stroke-width="13" stroke-linecap="round" stroke-dasharray="0 16" fill="none"/>
+          </svg>
+          <figcaption>If these dots were 1,000 local food TikToks, the 19 white ones came from restaurants. That’s 1.9%.</figcaption>
+        </figure>
         <div class="columns">
-          <p>SLI-KUBE checks Kubernetes manifests for security mistakes. In a software quality assurance course, I inherited its code, fixed the errors that stopped it from starting, and wrote a fuzzer that throws 500 inputs at each of ten methods.</p>
-          <p>The line above is a list that contains itself. The scanner follows it until Python runs out of stack, so one bad file hides the results for every other file. I suspected that case and the fuzzer confirmed it. Random mutation then found one I hadn’t planned: an empty key.</p>
-          <p>I also added logging to ten methods, recording which secrets were found but never their values. My first version logged from only eight of them, because no test data reached the other two. Continuous integration now checks all ten.</p>
+          <p>We found that number at HackATL 2026, and it became the problem to solve. With a team of four, I built an app that plans a restaurant owner’s videos shot by shot.</p>
+          <p>To replace guesswork about what goes viral, an Apify scraper compares top-performing posts against the rest.</p>
+          <p>Owners answer eight setup questions, and the Claude API turns their answers into shot lists and captions made for them.</p>
         </div>
-        <p class="built">Python, GitHub Actions, Docker. SLI-KUBE is by Akond Rahman and collaborators. The fuzzing, logging and CI are mine.</p>
-        <a class="button" href="https://github.com/mileslagman/MILESLAGMAN-FALL2026-SQA/blob/HEAD/SQA-REPO.md">Read the full report</a>
+        <p class="built">Next.js, TypeScript, React, Claude API, Apify</p>
       </div>
     </section>
 
-    <section class="band avr" id="avr" aria-labelledby="avr-h">
-      <div class="wrap avr-grid">
+    <section class="band letter" id="love-letter" aria-labelledby="letter-h">
+      <div class="wrap split">
         <div class="copy">
-          <h2 id="avr-h">An LED timed one instruction at a time</h2>
-          <p>This COMP 3350 group project blinks an Arduino’s LED in AVR assembly, with no timer. Two nested loops burn clock cycles between toggles, and one register, <code>r20</code>, sets how many.</p>
-          <p>At our setting it blinks about 50 times a second, so it looks steady to the eye. A phone camera reads its sensor row by row and catches the blinking as stripes. Change the register to see them move.</p>
-          <a class="button" href="https://github.com/mileslagman/COMP-3350---Assembly-Language">Read the assembly</a>
+          <h2 id="letter-h">A love letter drawn in text</h2>
+          <p>A bouquet of lily of the valley blooms in a lotus pond, then types its message. Every flower, leaf and petal is made of colored characters, with no libraries and no image files.</p>
+          <p>Each frame is painted on a small hidden canvas where one pixel stands for one character. The page reads those pixels back and draws a character for each, dense ones for bright spots and light ones for dim.</p>
+          <p class="built">JavaScript, Canvas 2D</p>
+          <div class="actions">
+            <a class="button" href="love-letter/">Open the love letter</a>
+            <a class="quiet-link" href="https://github.com/mileslagman/love-letter">Read the code</a>
+          </div>
         </div>
-        <div class="lab">
-          <div class="frame" id="frame" role="img" aria-label="Simulated phone camera frame"></div>
-          <label for="r20"><code>ldi r20, <output id="r20v" for="r20">208</output></code></label>
-          <input id="r20" type="range" min="12" max="255" value="208">
-          <p id="readout" aria-live="polite">159,750 cycles per toggle, or 9.98 ms. Blinks 50 times a second.</p>
-          <p class="note">Calculated from the instruction cycle counts at 16 MHz, for a camera reading one frame in 1/30 second.</p>
+        <div class="stage" id="stage">
+          <img src="assets/love-letter.webp" width="1000" height="1000" loading="lazy" alt="A bouquet of white bell flowers with a pale blue ribbon, drawn in colored text characters above a lotus pond, with the message Ikaw at ikaw.">
         </div>
       </div>
     </section>
 
     <section class="plain wrap" id="more" aria-labelledby="more-h">
       <h2 id="more-h">More projects</h2>
+      <div class="entries three">
+        <article>
+          <img class="tile" src="assets/festflow-dashboard.webp" width="1920" height="1290" loading="lazy" alt="FestFlow dashboard with a festival countdown, planned spend and trip costs.">
+          <h3>FestFlow</h3>
+          <p>Plans a festival trip and adds up the real cost: ticket, travel, stay and food. It splits shared costs across the group and works out who pays whom back. A Node server with no dependencies hides the API key and caches prices for six hours.</p>
+          <p class="built">JavaScript, Node, SerpApi</p>
+          <a href="https://github.com/mileslagman/festflow">FestFlow code</a>
+        </article>
+        <article>
+          <div class="tile exhibit"><code>&amp;a [*a]</code></div>
+          <h3>Scanner fuzzing</h3>
+          <p>That one-line file crashes SLI-KUBE, a Kubernetes security scanner, and hides the results for every other file. I fuzzed ten of its methods with 500 inputs each, added logging that never records a secret’s value, and set up CI. The scanner is by Akond Rahman and collaborators.</p>
+          <p class="built">Python, GitHub Actions</p>
+          <a href="https://github.com/mileslagman/MILESLAGMAN-FALL2026-SQA/blob/HEAD/SQA-REPO.md">Scanner report</a>
+        </article>
+        <article>
+          <div class="tile frame" id="frame" role="img" aria-label="Simulated phone camera frame"></div>
+          <h3>AVR assembly LED</h3>
+          <p>A group project that times an Arduino’s LED by counting clock cycles. It blinks too fast to see, but a phone camera catches it as stripes. Change the register to move them.</p>
+          <label for="r20"><code>ldi r20, <output id="r20v" for="r20">208</output></code></label>
+          <input id="r20" type="range" min="12" max="255" value="208">
+          <p class="built" id="readout" aria-live="polite">159,750 cycles per toggle, or 9.98 ms. Blinks 50 times a second.</p>
+          <p class="built">Simulated at 16 MHz, one camera frame in 1/30 second</p>
+          <a href="https://github.com/mileslagman/COMP-3350---Assembly-Language">Assembly code</a>
+        </article>
+      </div>
       <div class="entries">
-        <article>
-          <h3>Food8</h3>
-          <p>Built at HackATL 2026 with a team of four. We found that only 1.9% of local food TikToks came from restaurants, so we made an app that plans videos for owners, shot by shot. An Apify scraper compares top posts against the rest, and the Claude API turns an eight-question setup into shot lists and captions.</p>
-          <p class="built">Next.js, TypeScript, React, Claude API, Apify</p>
-        </article>
-        <article>
-          <h3>Food delivery database</h3>
-          <p>A 21-table schema that keeps order and menu data consistent with key and CHECK constraints. Seven role-based views show each user only their own rows. Nine triggers and an audit log stop invalid order updates and silent commission changes.</p>
-          <p class="built">SQL, SQLite</p>
-        </article>
         <article>
           <h3>Code vulnerability classifier</h3>
           <p>A course project that fine-tunes a BERT model on 4,649 samples to recognize 14 types of code vulnerability. It reached 86% accuracy.</p>
@@ -143,6 +177,8 @@
     </div>
   </footer>
 
+  <script src="order.js"></script>
+  <script src="letter.js"></script>
   <script src="avr.js"></script>
 </body>
 </html>
