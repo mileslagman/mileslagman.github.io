@@ -41,6 +41,9 @@ const EDITOR = `
   .editing .role-view[hidden] { display: block !important; margin-top: 1rem; }
   .editing .roles input { pointer-events: none; }
   .editing .card { transform: none !important; cursor: default; }
+  .editing .tools { grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: 1rem; }
+  .editing .icon { width: auto; min-width: 7rem; height: auto; padding: .6rem; background: none; color: #d8ad6b; }
+  .editing .tip { position: static !important; transform: none !important; opacity: 1; pointer-events: auto; margin-top: .4rem; }
   #edit-bar { position: fixed; z-index: 99; top: 0; left: 0; right: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem 1rem; padding: .6rem 1rem; background: #d8ad6b; color: #17110c; font: 500 15px/1.4 "Segoe UI", Arial, sans-serif; }
   #edit-bar button { padding: .4rem 1.1rem; border: 0; border-radius: 99px; background: #17110c; color: #fff; font: inherit; cursor: pointer; }
   #edit-bar button.plain { background: none; color: inherit; text-decoration: underline; }
