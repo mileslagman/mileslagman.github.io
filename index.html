@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Miles Lagman, software engineer</title>
-  <meta name="description" content="Miles Lagman is a software engineering senior at Auburn University. Projects include a festival trip planner, a fuzzer for a Kubernetes security scanner, and AVR assembly.">
+  <meta name="description" content="Miles Lagman is a software engineer graduating from Auburn University in May 2027 and looking for a full-time role in the Memphis area.">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="https://mileslagman.com/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Miles Lagman, software engineer">
-  <meta property="og:description" content="Software engineering senior at Auburn University. I build web apps and test how software breaks.">
+  <meta property="og:description" content="Software engineer graduating from Auburn University in May 2027. I build web apps and test how software breaks.">
   <meta property="og:url" content="https://mileslagman.com/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231f4fb8'/%3E%3Cpath d='M6 25V7h5l5 9 5-9h5v18h-5V15l-5 8.500-5-8.500v10z' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,11 +23,11 @@
   <header class="hero wrap">
     <h1>Miles<br>Lagman</h1>
     <div class="hero-text">
-      <p class="lede">I’m a software engineering senior at Auburn University. I build web apps, and I test how software breaks.</p>
-      <nav class="links" aria-label="Main">
-        <a href="#festflow">FestFlow</a>
-        <a href="#slikube">Scanner fuzzing</a>
-        <a href="#avr">AVR assembly</a>
+      <p class="lede">I’m a software engineer graduating from Auburn in May 2027. I build web apps, test how software breaks, and I’m looking for a full-time role in the Memphis area.</p>
+      <nav class="links" aria-label="Resume and contact">
+        <a href="Miles-Lagman-Resume.pdf">Resume (PDF)</a>
+        <a href="https://www.linkedin.com/in/regin-miles-lagman/">LinkedIn</a>
+        <a href="mailto:rmlagman@outlook.com">Email</a>
         <a href="https://github.com/mileslagman">GitHub</a>
       </nav>
     </div>
@@ -78,10 +78,69 @@
         </div>
       </div>
     </section>
+
+    <section class="plain wrap" id="more" aria-labelledby="more-h">
+      <h2 id="more-h">More projects</h2>
+      <div class="entries">
+        <article>
+          <h3>Food8</h3>
+          <p>Built at HackATL 2026 with a team of four. We found that only 1.9% of local food TikToks came from restaurants, so we made an app that plans videos for owners, shot by shot. An Apify scraper compares top posts against the rest, and the Claude API turns an eight-question setup into shot lists and captions.</p>
+          <p class="built">Next.js, TypeScript, React, Claude API, Apify</p>
+        </article>
+        <article>
+          <h3>Food delivery database</h3>
+          <p>A 21-table schema that keeps order and menu data consistent with key and CHECK constraints. Seven role-based views show each user only their own rows. Nine triggers and an audit log stop invalid order updates and silent commission changes.</p>
+          <p class="built">SQL, SQLite</p>
+        </article>
+        <article>
+          <h3>Code vulnerability classifier</h3>
+          <p>A course project that fine-tunes a BERT model on 4,649 samples to recognize 14 types of code vulnerability. It reached 86% accuracy.</p>
+          <p class="built">Python, PyTorch, Hugging Face</p>
+        </article>
+        <article>
+          <h3>Pairwise testing for Bandit</h3>
+          <p>A course project that cuts 144 configurations of the Bandit security scanner to 26 test runs, while still covering every pair of settings.</p>
+          <p class="built">Combinatorial testing, Bandit</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="plain wrap background" id="background" aria-labelledby="background-h">
+      <h2 id="background-h">Experience and education</h2>
+      <div class="entries">
+        <article>
+          <h3>Peer advisor, Auburn Engineering Student Services</h3>
+          <p class="when">May to August 2026</p>
+          <p>Planned degrees one-on-one with first-year engineering students, guided them through registration problems, and answered prospective students’ questions at orientation.</p>
+        </article>
+        <article>
+          <h3>BS in software engineering, Auburn University</h3>
+          <p class="when">Graduating May 2027</p>
+          <p>With a certificate in artificial intelligence engineering. Courses include data mining, software testing, secure software development and database systems.</p>
+        </article>
+        <article>
+          <h3>Tailor and sales associate, Tailored Brands</h3>
+          <p class="when">November 2022 to June 2023</p>
+          <p>Managed several alteration projects at once against customer deadlines, and gave personal fit consultations.</p>
+        </article>
+        <article>
+          <h3>Tools I work with</h3>
+          <p>Python, Java, JavaScript, TypeScript, C++, C, SQL and Bash. React, Next.js, Node.js, PyTorch, scikit-learn and pandas. Git, Docker, Terraform, AFL++ and Linux.</p>
+        </article>
+      </div>
+    </section>
   </main>
 
-  <footer class="wrap foot">
-    <p>Everything here is on <a href="https://github.com/mileslagman">my GitHub</a>.</p>
+  <footer class="foot">
+    <div class="wrap">
+      <h2>Get in touch</h2>
+      <p><a href="mailto:rmlagman@outlook.com">rmlagman@outlook.com</a></p>
+      <nav class="foot-links" aria-label="Elsewhere">
+        <a href="Miles-Lagman-Resume.pdf">Resume (PDF)</a>
+        <a href="https://www.linkedin.com/in/regin-miles-lagman/">LinkedIn</a>
+        <a href="https://github.com/mileslagman">GitHub</a>
+      </nav>
+    </div>
   </footer>
 
   <script src="avr.js"></script>

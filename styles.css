@@ -105,8 +105,23 @@ a { color: inherit; text-underline-offset: .2em; }
 .lab p { margin-bottom: .4rem; font-variant-numeric: tabular-nums; }
 .note { font-size: .9rem; color: #b9dcdd; }
 
-.foot { padding-block: 3rem; color: var(--quiet); }
-.foot p { margin: 0; }
+/* Plain sections */
+.plain { padding-block: clamp(3.5rem, 8vw, 7rem); }
+.background { padding-top: 0; }
+.entries {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 3.25rem) clamp(2rem, 6vw, 6rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+h3 { margin: 0 0 .5rem; font-size: 1.35rem; line-height: 1.25; font-weight: 700; font-stretch: 108%; text-wrap: balance; }
+.entries p { margin-bottom: .6em; }
+.entries .built, .entries .when { margin-block: 0 .6em; color: var(--quiet); font-size: .95rem; }
+
+.foot { padding-block: clamp(3.5rem, 7vw, 6rem); background: var(--ink); color: #fff; }
+.foot p { margin: 1.5rem 0; font-size: clamp(1.25rem, 2.6vw, 2rem); overflow-wrap: anywhere; }
+.foot-links { display: flex; flex-wrap: wrap; gap: .25rem 2rem; }
+.foot-links a { padding-block: .4rem; font-weight: 600; }
 
 @media (max-width: 60rem) {
   .festflow-grid, .avr-grid { grid-template-columns: minmax(0, 1fr); }
@@ -116,6 +131,9 @@ a { color: inherit; text-underline-offset: .2em; }
 @media (max-width: 44rem) {
   .hero-text { grid-template-columns: minmax(0, 1fr); }
   .shot { width: 46rem; max-width: none; }
+}
+@media (max-width: 44rem) {
+  .entries { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
