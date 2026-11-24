@@ -1,0 +1,122 @@
+:root {
+  --ink: #161a26;
+  --quiet: #555d70;
+  --night: #120a28;
+  --lilac: #e6dcff;
+  --gold: #ffd27a;
+  --kube: #1f4fb8;
+  --kube-pale: #dbe6ff;
+  --board: #00565c;
+  --led: #ffb52e;
+  --gutter: clamp(1.25rem, 5vw, 4.5rem);
+}
+
+* { box-sizing: border-box; }
+html { color-scheme: light; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 Archivo, "Helvetica Neue", Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wrap { max-width: 84rem; margin-inline: auto; padding-inline: var(--gutter); }
+
+h1, h2 { margin: 0; font-stretch: 118%; text-wrap: balance; }
+h1 { font-weight: 800; font-size: clamp(3.5rem, 15.5vw, 13rem); line-height: .86; letter-spacing: -.035em; margin-left: -.055em; }
+h2 { font-weight: 700; font-size: clamp(1.9rem, 4vw, 3.25rem); line-height: 1.06; letter-spacing: -.02em; }
+p { margin: 0 0 1.1em; max-width: 60ch; text-wrap: pretty; }
+code, pre { font-family: ui-monospace, "Cascadia Code", Consolas, Menlo, monospace; }
+
+a { color: inherit; text-underline-offset: .2em; }
+:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+.skip { position: absolute; left: -999px; top: 0; padding: .75rem 1rem; background: #fff; }
+.skip:focus { left: 0; z-index: 1; }
+
+/* Opening */
+.hero { padding-block: clamp(2.5rem, 7vw, 6rem) clamp(3rem, 7vw, 6rem); }
+.hero-text {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 2rem clamp(2rem, 6vw, 6rem);
+  align-items: end;
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+.lede { margin: 0; max-width: 30ch; font-size: clamp(1.35rem, 2.4vw, 2rem); line-height: 1.3; font-weight: 500; }
+.links { display: grid; grid-template-columns: repeat(2, max-content); gap: .25rem 2.5rem; }
+.links a { padding-block: .4rem; font-weight: 600; }
+
+/* Project bands: each takes its color from the project itself */
+.band { padding-block: clamp(3.5rem, 8vw, 7.5rem); overflow: hidden; }
+.copy h2 { margin-bottom: 1.6rem; }
+.built { margin-top: 1.6rem; font-size: .95rem; }
+.button {
+  display: inline-block;
+  padding: .8rem 1.25rem;
+  font-weight: 650;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.button:hover { text-decoration: underline; }
+
+.festflow { background: var(--night); color: var(--lilac); }
+.festflow h2 { color: #fff; }
+.festflow-grid {
+  display: grid;
+  grid-template-columns: minmax(19rem, 27rem) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+.shot {
+  display: block;
+  width: clamp(46rem, 64vw, 66rem);
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgb(230 220 255 / .18);
+}
+.festflow .button { background: var(--gold); color: var(--night); }
+
+.slikube { background: var(--kube); color: #fff; }
+.slikube h2 { max-width: 22ch; }
+.exhibit {
+  margin: clamp(1.5rem, 4vw, 3rem) 0 clamp(2rem, 5vw, 3.75rem);
+  font-size: clamp(3.75rem, 19vw, 16rem);
+  line-height: 1;
+  letter-spacing: -.04em;
+  white-space: pre;
+}
+.columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(1.5rem, 4vw, 4rem); }
+.slikube .built { max-width: 70ch; color: var(--kube-pale); }
+.slikube .button { background: #fff; color: var(--kube); }
+
+.avr { background: var(--board); color: #e3f4f4; }
+.avr h2 { color: #fff; }
+.avr-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+}
+.avr .button { background: var(--led); color: #1d1300; }
+.frame { aspect-ratio: 16 / 10; margin-bottom: 1.4rem; background-color: #2a1c00; }
+.lab label { display: block; font-size: 1.35rem; }
+.lab input { width: 100%; height: 2.75rem; margin: 0; accent-color: var(--led); cursor: pointer; }
+.lab p { margin-bottom: .4rem; font-variant-numeric: tabular-nums; }
+.note { font-size: .9rem; color: #b9dcdd; }
+
+.foot { padding-block: 3rem; color: var(--quiet); }
+.foot p { margin: 0; }
+
+@media (max-width: 60rem) {
+  .festflow-grid, .avr-grid { grid-template-columns: minmax(0, 1fr); }
+  .shot { width: 100%; }
+  .columns { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 44rem) {
+  .hero-text { grid-template-columns: minmax(0, 1fr); }
+  .shot { width: 46rem; max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

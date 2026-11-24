@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Miles Lagman, software engineer</title>
+  <meta name="description" content="Miles Lagman is a software engineering senior at Auburn University. Projects include a festival trip planner, a fuzzer for a Kubernetes security scanner, and AVR assembly.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="https://mileslagman.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Miles Lagman, software engineer">
+  <meta property="og:description" content="Software engineering senior at Auburn University. I build web apps and test how software breaks.">
+  <meta property="og:url" content="https://mileslagman.com/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231f4fb8'/%3E%3Cpath d='M6 25V7h5l5 9 5-9h5v18h-5V15l-5 8.500-5-8.500v10z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&amp;display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#projects">Skip to projects</a>
+
+  <header class="hero wrap">
+    <h1>Miles<br>Lagman</h1>
+    <div class="hero-text">
+      <p class="lede">I’m a software engineering senior at Auburn University. I build web apps, and I test how software breaks.</p>
+      <nav class="links" aria-label="Main">
+        <a href="#festflow">FestFlow</a>
+        <a href="#slikube">Scanner fuzzing</a>
+        <a href="#avr">AVR assembly</a>
+        <a href="https://github.com/mileslagman">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="projects">
+    <section class="band festflow" id="festflow" aria-labelledby="festflow-h">
+      <div class="wrap festflow-grid">
+        <div class="copy">
+          <h2 id="festflow-h">FestFlow plans a whole festival trip</h2>
+          <p>Pick a festival and it adds up the real cost: ticket, flight or drive, where you’ll stay, getting around, and food. It covers 18 festivals, splits shared costs across the group, and works out who pays whom back.</p>
+          <p>The server has no dependencies beyond Node. It keeps the API key off the browser and caches each price search for six hours, because the free plan allows only 250 a month. With no key, the app uses its own estimates.</p>
+          <p class="built">JavaScript, Node, SerpApi, OpenStreetMap</p>
+          <a class="button" href="https://github.com/mileslagman/festflow">Read the FestFlow code</a>
+        </div>
+        <img class="shot" src="assets/festflow-dashboard.webp" width="1920" height="1290" alt="FestFlow dashboard with a countdown to the next festival, planned spend, budget left, and cost breakdowns for two trips.">
+      </div>
+    </section>
+
+    <section class="band slikube" id="slikube" aria-labelledby="slikube-h">
+      <div class="wrap">
+        <h2 id="slikube-h">This file crashes a Kubernetes security scanner</h2>
+        <pre class="exhibit"><code>&amp;a [*a]</code></pre>
+        <div class="columns">
+          <p>SLI-KUBE checks Kubernetes manifests for security mistakes. In a software quality assurance course, I inherited its code, fixed the errors that stopped it from starting, and wrote a fuzzer that throws 500 inputs at each of ten methods.</p>
+          <p>The line above is a list that contains itself. The scanner follows it until Python runs out of stack, so one bad file hides the results for every other file. I suspected that case and the fuzzer confirmed it. Random mutation then found one I hadn’t planned: an empty key.</p>
+          <p>I also added logging to ten methods, recording which secrets were found but never their values. My first version logged from only eight of them, because no test data reached the other two. Continuous integration now checks all ten.</p>
+        </div>
+        <p class="built">Python, GitHub Actions, Docker. SLI-KUBE is by Akond Rahman and collaborators. The fuzzing, logging and CI are mine.</p>
+        <a class="button" href="https://github.com/mileslagman/MILESLAGMAN-FALL2026-SQA/blob/HEAD/SQA-REPO.md">Read the full report</a>
+      </div>
+    </section>
+
+    <section class="band avr" id="avr" aria-labelledby="avr-h">
+      <div class="wrap avr-grid">
+        <div class="copy">
+          <h2 id="avr-h">An LED timed one instruction at a time</h2>
+          <p>This COMP 3350 group project blinks an Arduino’s LED in AVR assembly, with no timer. Two nested loops burn clock cycles between toggles, and one register, <code>r20</code>, sets how many.</p>
+          <p>At our setting it blinks about 50 times a second, so it looks steady to the eye. A phone camera reads its sensor row by row and catches the blinking as stripes. Change the register to see them move.</p>
+          <a class="button" href="https://github.com/mileslagman/COMP-3350---Assembly-Language">Read the assembly</a>
+        </div>
+        <div class="lab">
+          <div class="frame" id="frame" role="img" aria-label="Simulated phone camera frame"></div>
+          <label for="r20"><code>ldi r20, <output id="r20v" for="r20">208</output></code></label>
+          <input id="r20" type="range" min="12" max="255" value="208">
+          <p id="readout" aria-live="polite">159,750 cycles per toggle, or 9.98 ms. Blinks 50 times a second.</p>
+          <p class="note">Calculated from the instruction cycle counts at 16 MHz, for a camera reading one frame in 1/30 second.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p>Everything here is on <a href="https://github.com/mileslagman">my GitHub</a>.</p>
+  </footer>
+
+  <script src="avr.js"></script>
+</body>
+</html>
